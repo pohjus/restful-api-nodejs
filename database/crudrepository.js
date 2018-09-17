@@ -36,7 +36,6 @@ class CrudRepository {
   findById (id, success, err) {
     let locationToBeFound = null
     this.database.forEach((loc) => {
-      console.log(loc.idNumber === Number(id))
       if(loc.idNumber === Number(id)) {
         locationToBeFound = loc
       }
