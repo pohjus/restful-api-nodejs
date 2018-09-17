@@ -28,7 +28,7 @@ locations.post('/', (req, res) => {
 locations.delete('/:urlId([1-9]+)', (req, res) => {
   const urlId = Number(req.params.urlId)
   crudRepository.deleteById(urlId, () => {
-      res.status(200).send({ 'status': 'deleted' })
+      res.status(204).end()
   }, () => res.status(404).send({"error": "Can't find with given id."}))
 })
 
