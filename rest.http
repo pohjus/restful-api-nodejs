@@ -1,5 +1,4 @@
-DELETE http://localhost:8080/locations/2
-
+###
 POST http://localhost:8080/locations/
 Content-type: application/json
 
@@ -8,6 +7,11 @@ Content-type: application/json
     "lon": 80
 }
 
+###
 GET http://localhost:8080/locations/
 
-DELETE http://localhost:8080/locations/3
+###
+GET http://localhost:8080/locations/1
+
+###
+DELETE http://localhost:8080/locations/1
