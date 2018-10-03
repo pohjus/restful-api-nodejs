@@ -9,7 +9,7 @@ locations.get('/', (req, res) => {
   crudRepository.findAll((result) => res.send(result))
 })
 
-locations.get('/:urlId([1-9]+)', (req, res) => {
+locations.get('/:urlId([0-9]+)', (req, res) => {
   const urlId = Number(req.params.urlId)
   crudRepository.findById(urlId, (result) => res.send(result), 
     () => res.status(404).send({"error": "Can't find with given id."}) )
@@ -25,7 +25,7 @@ locations.post('/', (req, res) => {
   })
 })
 
-locations.delete('/:urlId([1-9]+)', (req, res) => {
+locations.delete('/:urlId([0-9]+)', (req, res) => {
   const urlId = Number(req.params.urlId)
   crudRepository.deleteById(urlId, () => {
       res.status(204).end()
