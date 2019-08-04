@@ -17,6 +17,6 @@ node app.js
 curl http://localhost:8080/locations/
 curl http://localhost:8080/locations/1
 curl -X DELETE http://localhost:8080/locations/1
-curl -H "Content-type: application/json" -d "{\"lat\":65, \"lon\":66} http://localhost:8080/locations/
+curl -H "Content-type: application/json" -d "{\"lat\":65, \"lon\":66}" http://localhost:8080/locations/
 ~~~~
 
