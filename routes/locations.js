@@ -21,7 +21,8 @@ locations.post('/', (req, res) => {
     let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl + idNumber;
     res.location(fullUrl)
     res.status(201)
-    res.end()
+    location.id = idNumber
+    res.send(location)
   })
 })
 
