@@ -18,5 +18,5 @@ app.use(express.json())
 app.use('/locations', locationsmemory)
 
 const server = app.listen(8080, () => {
-  console.log(`Listening on port ${server.address().port}`)
+  console.log(`Listening on port ${server.address().port} - try out http://localhost:8080/locations/`)
 })
