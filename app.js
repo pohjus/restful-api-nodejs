@@ -1,12 +1,12 @@
-'use strict'
+"use strict";
 
-const express = require('express')
-let cors = require('cors')
+const express = require("express");
+let cors = require("cors");
 
-const locationsmemory = require('./routes/locations.js')
+const locationsmemory = require("./routes/locations.js");
 
-const app = express()
-app.use(cors())
+const app = express();
+app.use(cors());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Expose-Headers", "*");
@@ -14,9 +14,13 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(express.json())
-app.use('/locations', locationsmemory)
+app.use(express.json());
+app.use("/locations", locationsmemory);
 
 const server = app.listen(8080, () => {
-  console.log(`Listening on port ${server.address().port} - try out http://localhost:8080/locations/`)
-})
+  console.log(
+    `Listening on port ${
+      server.address().port
+    } - try out http://localhost:8080/locations/ in browser.`
+  );
+});
