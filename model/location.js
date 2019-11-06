@@ -28,10 +28,10 @@ class Location {
 
   set longitude (newLongitude) {
     const newLongitudeNumber = Number(newLongitude)
-    if (!isNaN(newLongitudeNumber) && newLongitudeNumber >= -90 && newLongitudeNumber <= 90) {
+    if (!isNaN(newLongitudeNumber) && newLongitudeNumber >= -180 && newLongitudeNumber <= 180) {
       this.lon = newLongitudeNumber
     } else {
-      throw new TypeError('longitude must be [-90, +90]')
+      throw new TypeError('longitude must be [-180, +180]')
     }
   }
 
@@ -41,10 +41,10 @@ class Location {
 
   set latitude (newLatitude) {
     const newLatitudeNumber = Number(newLatitude)
-    if (!isNaN(newLatitudeNumber) && newLatitudeNumber >= -180 && newLatitudeNumber <= 180) {
+    if (!isNaN(newLatitudeNumber) && newLatitudeNumber >= -90 && newLatitudeNumber <= 90) {
       this.lat = newLatitudeNumber
     } else {
-      throw new TypeError('latitude must be [-180, +180], was given ' + newLatitude)
+      throw new TypeError('latitude must be [-90, +90], was given ' + newLatitude)
     }
   }
 }
