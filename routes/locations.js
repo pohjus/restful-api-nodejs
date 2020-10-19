@@ -1,36 +1,53 @@
-'use strict'
+"use strict";
 
-const express = require('express')
-const crudRepository = require('../database/crudrepository.js')
+const express = require("express");
+const crudRepository = require("../database/crudrepository.js");
+const mysql = require("mysql");
+const conf = require("./conf.js");
 
-let locations = express.Router()
+let locations = express.Router();
 
-locations.get('/', (req, res) => {
-  crudRepository.findAll((result) => res.send(result))
-})
+locations.get("/dbtest", (req, res) => {
+  const connection = mysql.createConnection(conf);
+  connection.query("select * from location", (err, locations) => {
+    res.json(locations);
+  });
+});
 
-locations.get('/:urlId([0-9]+)', (req, res) => {
-  const urlId = Number(req.params.urlId)
-  crudRepository.findById(urlId, (result) => res.send(result), 
-    () => res.status(404).send({"error": "Can't find with given id."}) )
-})
+locations.get("/", (req, res) => {
+  crudRepository.findAll((result) => res.send(result));
+});
 
-locations.post('/', (req, res) => {
-  let location = {"lat": req.body.lat, "lon": req.body.lon}
+locations.get("/:urlId([0-9]+)", (req, res) => {
+  const urlId = Number(req.params.urlId);
+  crudRepository.findById(
+    urlId,
+    (result) => res.send(result),
+    () => res.status(404).send({ error: "Can't find with given id." })
+  );
+});
+
+locations.post("/", (req, res) => {
+  let location = { lat: req.body.lat, lon: req.body.lon };
   crudRepository.save(location, (idNumber) => {
-    let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl + idNumber;
-    res.location(fullUrl)
-    res.status(201)
-    location.id = idNumber
-    res.send(location)
-  })
-})
+    let fullUrl =
+      req.protocol + "://" + req.get("host") + req.originalUrl + idNumber;
+    res.location(fullUrl);
+    res.status(201);
+    location.id = idNumber;
+    res.send(location);
+  });
+});
 
-locations.delete('/:urlId([0-9]+)', (req, res) => {
-  const urlId = Number(req.params.urlId)
-  crudRepository.deleteById(urlId, () => {
-      res.status(204).end()
-  }, () => res.status(404).send({"error": "Can't find with given id."}))
-})
+locations.delete("/:urlId([0-9]+)", (req, res) => {
+  const urlId = Number(req.params.urlId);
+  crudRepository.deleteById(
+    urlId,
+    () => {
+      res.status(204).end();
+    },
+    () => res.status(404).send({ error: "Can't find with given id." })
+  );
+});
 
-module.exports = locations
+module.exports = locations;
