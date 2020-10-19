@@ -2,17 +2,8 @@
 
 const express = require("express");
 const crudRepository = require("../database/crudrepository.js");
-const mysql = require("mysql");
-const conf = require("./conf.js");
 
 let locations = express.Router();
-
-locations.get("/dbtest", (req, res) => {
-  const connection = mysql.createConnection(conf);
-  connection.query("select * from location", (err, locations) => {
-    res.json(locations);
-  });
-});
 
 locations.get("/", (req, res) => {
   crudRepository.findAll((result) => res.send(result));
